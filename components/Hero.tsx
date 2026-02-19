@@ -37,13 +37,13 @@ const Hero = () => {
       <div className="relative z-20 text-center flex flex-col items-center gap-4 mt-auto mb-20">
         <FadeIn delay={1.0}>
           <div className="writing-vertical-rl text-white drop-shadow-md text-sm tracking-[0.3em] font-serif uppercase opacity-90 h-24 mb-4 border-l border-white/50 pl-3 mx-auto">
-            Eternal Promise
+            우리 결혼합니다.
           </div>
         </FadeIn>
         
         <FadeIn delay={1.2}>
           <h1 className="text-white text-3xl font-serif tracking-widest drop-shadow-lg">
-            {WEDDING_DATA.groom.name.split(' ')[1]} <span className="text-gold mx-2">&</span> {WEDDING_DATA.bride.name.split(' ')[1]}
+            {WEDDING_DATA.groom.name} <span className="text-gold mx-2">&</span> {WEDDING_DATA.bride.name}
           </h1>
         </FadeIn>
 

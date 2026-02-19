@@ -2,19 +2,19 @@ import { GalleryImage, TransportInfo, WeddingInfo } from './types';
 
 export const WEDDING_DATA: WeddingInfo = {
   groom: {
-    name: "이민호",
-    parents: { father: "이상훈", mother: "김지영" },
+    name: "남상이",
+    parents: { father: "남충우", mother: "이일순" },
     relation: "장남"
   },
   bride: {
-    name: "박지원",
-    parents: { father: "박동욱", mother: "최수진" },
-    relation: "장녀"
+    name: "김현아",
+    parents: { father: "김용호", mother: "최수진" },
+    relation: "차녀"
   },
   date: "2026-06-07T13:00:00",
-  time: "2026년 6월 7일 일요일 오후 1시",
-  venue: "신라호텔",
-  hall: "다이너스티 홀"
+  time: "2026년 6월 7일 일요일 오후 3시",
+  venue: "장소1",
+  hall: "장소2"
 };
 
 // Generate placeholder images using picsum

@@ -60,7 +60,7 @@ const CalendarSection = () => {
                      {day}
                    </span>
                    {isWeddingDay && (
-                     <div className="absolute inset-0 m-auto w-8 h-8 bg-gold rounded-full z-0 shadow-md flex items-center justify-center">
+                     <div className="absolute inset-0 m-auto w-8 h-8 bg-gold rounded-full z-0 shadow-md flex items-center justify-center top-[4px]">
                         <div className="w-9 h-9 border border-gold rounded-full absolute -inset-0.5 animate-pulse"></div>
                      </div>
                    )}

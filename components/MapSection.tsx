@@ -22,7 +22,8 @@ const MapSection = () => {
              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.633458628045!2d127.00539577638368!3d37.55594612809623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca337691552a1%3A0xb367119c43714653!2sThe%20Shilla%20Seoul!5e0!3m2!1sen!2skr!4v1715000000000!5m2!1sen!2skr"
              width="100%" 
              height="100%" 
-             style={{ border: 0, filter: 'grayscale(100%) contrast(90%)' }} 
+             style={{border: 0}}
+            //  style={{ border: 0, filter: 'grayscale(100%) contrast(90%)' }} 
              allowFullScreen 
              loading="lazy" 
              referrerPolicy="no-referrer-when-downgrade"
