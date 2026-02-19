@@ -1,0 +1,55 @@
+import { GalleryImage, TransportInfo, WeddingInfo } from './types';
+
+export const WEDDING_DATA: WeddingInfo = {
+  groom: {
+    name: "이민호",
+    parents: { father: "이상훈", mother: "김지영" },
+    relation: "장남"
+  },
+  bride: {
+    name: "박지원",
+    parents: { father: "박동욱", mother: "최수진" },
+    relation: "장녀"
+  },
+  date: "2026-06-07T13:00:00",
+  time: "2026년 6월 7일 일요일 오후 1시",
+  venue: "신라호텔",
+  hall: "다이너스티 홀"
+};
+
+// Generate placeholder images using picsum
+export const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 15 }).map((_, i) => ({
+  id: i + 1,
+  src: `https://picsum.photos/800/${i % 2 === 0 ? 1200 : 800}?random=${i + 10}`,
+  alt: `Wedding Photo ${i + 1}`,
+  width: 800,
+  height: i % 2 === 0 ? 1200 : 800,
+}));
+
+export const TRANSPORT_DATA: TransportInfo[] = [
+  {
+    type: 'subway',
+    title: '지하철',
+    details: [
+      '3호선 동대입구역 5번 출구',
+      '정문 방향으로 도보 약 5분'
+    ]
+  },
+  {
+    type: 'bus',
+    title: '버스',
+    details: [
+      '간선: 144, 301, 407',
+      '지선: 7212, N13 (심야)',
+      '장충체육관 앞 하차'
+    ]
+  },
+  {
+    type: 'car',
+    title: '자가용',
+    details: [
+      '네비게이션: "신라호텔" 또는 "서울 중구 동호로 249"',
+      '호텔 주차타워 이용 (3시간 무료)'
+    ]
+  }
+];
