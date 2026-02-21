@@ -24,7 +24,7 @@ const CalendarSection = () => {
           {format(weddingDate, 'yyyy')}년 {format(weddingDate, 'M')}월
         </h2>
         <p className='text-center text-charcoal/60 text-sm font-myeongjo mb-10 tracking-widest'>
-          {format(weddingDate, 'yyyy.MM.dd')} / {weekDays[getDay(weddingDate)]}요일
+          {format(weddingDate, 'yyyy.MM.dd')} / {weekDays[getDay(weddingDate)]}요일 오후 3시
         </p>
 
         <div className='max-w-xs mx-auto mb-12'>
