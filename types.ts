@@ -13,6 +13,8 @@ export interface WeddingInfo {
   time: string;
   venue: string;
   hall: string;
+  message: string;
+  greeting: string;
 }
 
 export interface GalleryImage {
