@@ -5,7 +5,7 @@ import heroImage from '../assets/hero.jpeg';
 
 const Hero = () => {
   return (
-    <header className='relative w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center p-6 bg-cream'>
+    <header className='relative w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center p-6 bg-white'>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -8,8 +8,8 @@ import Footer from './components/Footer';
 
 const App = () => {
   return (
-    <div className="w-full min-h-screen bg-cream text-charcoal font-myeongjo overflow-x-hidden selection:bg-gold-light selection:text-charcoal">
-      <div className="max-w-md mx-auto shadow-2xl bg-cream min-h-screen relative">
+    <div className='w-full min-h-screen bg-white text-charcoal font-myeongjo overflow-x-hidden selection:bg-gold-light selection:text-charcoal'>
+      <div className='max-w-md mx-auto shadow-2xl bg-white min-h-screen relative'>
         <Hero />
         <Greeting />
         <Gallery />

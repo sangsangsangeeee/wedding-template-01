@@ -13,8 +13,8 @@ export const WEDDING_DATA: WeddingInfo = {
   },
   date: '2026-06-07T13:00:00',
   time: '2026년 6월 7일 일요일 오후 3시',
-  venue: '장소1',
-  hall: '장소2',
+  venue: '서울여성플라자 피움 서울',
+  hall: '국제회의장',
   message: '우리 결혼합니다.',
   greeting: `햇살이 가장 예쁜 6월에 
 저희가 사랑의 결실을 맺게 되었습니다.
@@ -24,6 +24,10 @@ export const WEDDING_DATA: WeddingInfo = {
 새로운 시작의 자리에
 소중한 분들을 초대합니다.
 따뜻한 마음으로 축복해 주시면 감사하겠습니다.`,
+  mapOptions: {
+    lat: 37.5132, // 대방동 서울여성플라자 위도
+    lng: 126.9242, // 경도
+  },
 };
 
 // Generate placeholder images using picsum

@@ -18,7 +18,7 @@ const CalendarSection = () => {
   const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
-    <section className='py-24 px-6 bg-cream/50'>
+    <section className='py-24 px-6 bg-white'>
       <FadeIn>
         <h2 className='text-center text-gold font-myeongjo text-2xl tracking-widest mb-2'>
           {format(weddingDate, 'yyyy')}년 {format(weddingDate, 'M')}월

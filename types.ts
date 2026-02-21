@@ -15,6 +15,10 @@ export interface WeddingInfo {
   hall: string;
   message: string;
   greeting: string;
+  mapOptions: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export interface GalleryImage {
