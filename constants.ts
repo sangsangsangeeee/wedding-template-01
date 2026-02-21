@@ -8,7 +8,7 @@ export const WEDDING_DATA: WeddingInfo = {
   },
   bride: {
     name: '김현아',
-    parents: { father: '김용호', mother: '임민자' },
+    parents: { father: '김용호', mother: '최수진' },
     relation: '차녀',
   },
   date: '2026-06-07T13:00:00',
@@ -27,13 +27,24 @@ export const WEDDING_DATA: WeddingInfo = {
 };
 
 // Generate placeholder images using picsum
-export const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 15 }).map((_, i) => ({
-  id: i + 1,
-  src: `https://picsum.photos/800/${i % 2 === 0 ? 1200 : 800}?random=${i + 10}`,
-  alt: `Wedding Photo ${i + 1}`,
-  width: 800,
-  height: i % 2 === 0 ? 1200 : 800,
-}));
+// Import all gallery images from assets using Vite's import.meta.glob
+const galleryImageModules = import.meta.glob('./assets/gallery-*.jpeg', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+// We know there are 17 images from gallery-0 to gallery-16
+export const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 17 }).map((_, i) => {
+  const src = galleryImageModules[`./assets/gallery-${i}.jpeg`] as string;
+  return {
+    id: i + 1,
+    src,
+    alt: `Wedding Photo ${i + 1}`,
+    width: 800,
+    height: i % 2 === 0 ? 1200 : 800, // We keep the alternating sizes for the masonry layout
+  };
+});
 
 export const TRANSPORT_DATA: TransportInfo[] = [
   {
