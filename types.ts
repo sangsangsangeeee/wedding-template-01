@@ -34,3 +34,16 @@ export interface TransportInfo {
   title: string;
   details: string[];
 }
+
+export interface AccountInfo {
+  role: string;
+  name: string;
+  bank: string;
+  account: string;
+}
+
+export interface AccountGroup {
+  side: 'groom' | 'bride';
+  label: string;
+  accounts: AccountInfo[];
+}

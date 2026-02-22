@@ -3,7 +3,7 @@ import FadeIn from './FadeIn';
 
 const Greeting = () => {
   return (
-    <section className='py-24 px-8 text-center bg-white relative'>
+    <section className='py-24 px-8 text-center bg-cream relative'>
       <FadeIn>
         <h2 className='text-gold font-serif text-xl mb-8 tracking-widest'>INVITATION</h2>
 

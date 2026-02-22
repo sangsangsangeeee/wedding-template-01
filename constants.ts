@@ -1,4 +1,4 @@
-import { GalleryImage, TransportInfo, WeddingInfo } from './types';
+import { AccountGroup, GalleryImage, TransportInfo, WeddingInfo } from './types';
 
 export const WEDDING_DATA: WeddingInfo = {
   groom: {
@@ -8,7 +8,7 @@ export const WEDDING_DATA: WeddingInfo = {
   },
   bride: {
     name: '김현아',
-    parents: { father: '김용호', mother: '최수진' },
+    parents: { father: '김용호', mother: '임민자' },
     relation: '차녀',
   },
   date: '2026-06-07T13:00:00',
@@ -50,6 +50,25 @@ export const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 17 }).map((_,
     height: i % 2 === 0 ? 1200 : 800, // We keep the alternating sizes for the masonry layout
   };
 });
+
+export const ACCOUNT_DATA: AccountGroup[] = [
+  {
+    side: 'groom',
+    label: '신랑 측',
+    accounts: [
+      { role: '신랑', name: '남상이', bank: '○○은행', account: '000-0000-0000' },
+      { role: '신랑 어머니', name: '이일순', bank: '○○은행', account: '000-0000-0000' },
+    ],
+  },
+  {
+    side: 'bride',
+    label: '신부 측',
+    accounts: [
+      { role: '신부', name: '김현아', bank: '○○은행', account: '000-0000-0000' },
+      { role: '신부 어머니', name: '임민자', bank: '○○은행', account: '000-0000-0000' },
+    ],
+  },
+];
 
 export const TRANSPORT_DATA: TransportInfo[] = [
   {

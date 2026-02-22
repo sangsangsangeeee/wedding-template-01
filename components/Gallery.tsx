@@ -48,7 +48,7 @@ const Gallery = () => {
   };
 
   return (
-    <section className='py-20 bg-white border-t border-cream-200 min-h-screen'>
+    <section className='py-20 bg-cream border-t border-cream-200 min-h-screen'>
       <FadeIn className='px-8 mb-10 text-center'>
         <h2 className='text-gold font-serif text-xl tracking-widest mb-2'>GALLERY</h2>
         <p className='text-xs text-charcoal/50 font-serif'>우리의 소중한 순간들</p>

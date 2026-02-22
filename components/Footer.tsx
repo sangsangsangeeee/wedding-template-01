@@ -40,7 +40,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className='py-16 bg-white text-center border-t border-gold/20'>
+    <footer className='py-16 bg-cream text-center border-t border-gold/20'>
       <div className='mb-8'>
         <button
           onClick={handleShare}
