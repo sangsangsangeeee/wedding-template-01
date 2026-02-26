@@ -1,11 +1,25 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { WEDDING_DATA } from '../constants';
 import FadeIn from './FadeIn';
 import heroImage from '../assets/hero.jpeg';
 
 const Hero = () => {
+  const [fixedHeight, setFixedHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    // 최초 로드 시 높이를 고정하여 카카오 인앱 브라우저 주소창 변화에 영향받지 않도록 함
+    setFixedHeight(window.innerHeight);
+  }, []);
+
   return (
-    <header className='relative w-full h-[100svh] overflow-hidden flex flex-col items-center justify-center p-6 bg-cream'>
+    <header
+      className='relative w-full overflow-hidden flex flex-col items-center justify-center p-6 bg-cream'
+      style={{
+        height: fixedHeight ? `${fixedHeight}px` : '100svh',
+        transition: 'height 0.3s ease-out',
+      }}
+    >
       <div
         className='absolute inset-0 z-0 animate-[fadeIn_1.5s_ease-out_forwards]'
         style={{ opacity: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
@@ -14,7 +28,11 @@ const Hero = () => {
           src={heroImage}
           alt='Main Couple'
           className='w-full h-full object-cover opacity-90'
-          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+          style={{
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transition: 'height 0.3s ease-out, transform 0.3s ease-out',
+          }}
         />
         <div className='absolute inset-0 bg-cream/20 mix-blend-overlay'></div>
       </div>
