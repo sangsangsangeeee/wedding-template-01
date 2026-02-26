@@ -5,16 +5,19 @@ import heroImage from '../assets/hero.jpeg';
 
 const Hero = () => {
   return (
-    <header className='relative w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center p-6 bg-cream'>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
-        className='absolute inset-0 z-0'
+    <header className='relative w-full h-[100svh] overflow-hidden flex flex-col items-center justify-center p-6 bg-cream'>
+      <div
+        className='absolute inset-0 z-0 animate-[fadeIn_1.5s_ease-out_forwards]'
+        style={{ opacity: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
       >
-        <img src={heroImage} alt='Main Couple' className='w-full h-full object-cover opacity-90' />
+        <img
+          src={heroImage}
+          alt='Main Couple'
+          className='w-full h-full object-cover opacity-90'
+          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+        />
         <div className='absolute inset-0 bg-cream/20 mix-blend-overlay'></div>
-      </motion.div>
+      </div>
 
       {/* Frame Effect */}
       <motion.div
