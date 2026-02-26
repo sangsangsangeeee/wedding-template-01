@@ -31,9 +31,9 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <div className='relative z-20 text-center flex flex-col items-center gap-4 mt-auto mb-20'>
+      <div className='relative z-20 text-center flex flex-col items-center gap-4 mt-[2rem] min-[376px]:mt-[3rem] md:mt-[10rem] mb-auto'>
         <FadeIn delay={1.0}>
-          <div className='writing-vertical-rl text-white drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] font-medium text-sm tracking-[0.3em] font-serif uppercase h-24 mb-4 border-l border-white/50 pl-3 mx-auto'>
+          <div className='writing-vertical-rl text-white drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] font-medium text-sm tracking-[0.3em] font-serif uppercase h-[3rem] mb-[.75rem] border-l border-white/50 pl-3 mx-auto'>
             {WEDDING_DATA.message}
           </div>
         </FadeIn>
