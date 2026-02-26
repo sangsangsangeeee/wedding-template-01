@@ -6,7 +6,6 @@ import FadeIn from './FadeIn';
 
 const Gallery = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [lastSelectedId, setLastSelectedId] = useState<number | null>(null);
   const [scale, setScale] = useState(1);
 
   const openModal = (id: number) => {
@@ -16,14 +15,8 @@ const Gallery = () => {
   };
 
   const closeModal = () => {
-    setLastSelectedId(selectedId);
     setSelectedId(null);
     document.body.style.overflow = 'unset';
-
-    // Reset the z-index boost after the layout animation completes (approx 500ms)
-    setTimeout(() => {
-      setLastSelectedId(null);
-    }, 500);
   };
 
   const selectedImage = GALLERY_IMAGES.find((img) => img.id === selectedId);
@@ -57,37 +50,22 @@ const Gallery = () => {
       {/* Masonry Layout (Pinterest Style) */}
       <div className='px-4'>
         <div className='columns-2 gap-3 space-y-3'>
-          {GALLERY_IMAGES.map((img, index) => {
-            const isSelectedOrClosing = img.id === selectedId || img.id === lastSelectedId;
-            return (
-              <FadeIn
-                key={img.id}
-                delay={index * 0.05}
-                className={isSelectedOrClosing ? 'relative z-50' : 'relative z-0'}
+          {GALLERY_IMAGES.map((img, index) => (
+            <FadeIn key={img.id} delay={index * 0.05} className='relative'>
+              <div
+                className='break-inside-avoid relative group cursor-pointer overflow-hidden rounded-sm shadow-md border border-black/5'
+                onClick={() => openModal(img.id)}
               >
-                <motion.div
-                  layoutId={`image-${img.id}`}
-                  className='break-inside-avoid relative group cursor-pointer overflow-hidden rounded-sm shadow-md border border-black/5'
-                  onClick={() => openModal(img.id)}
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow:
-                      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    className='w-full h-auto object-cover transition-filter duration-300 hover:brightness-110'
-                    loading='lazy'
-                  />
-                  {/* Hover overlay for desktop / visual cue */}
-                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none' />
-                </motion.div>
-              </FadeIn>
-            );
-          })}
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className='w-full h-auto object-cover transition-filter duration-300 hover:brightness-110'
+                  loading='lazy'
+                />
+                <div className='absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none' />
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </div>
 
@@ -99,6 +77,7 @@ const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
             {/* Controls */}
             <div className='absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50'>
@@ -113,7 +92,7 @@ const Gallery = () => {
               </button>
             </div>
 
-            {/* Image Container with Zoom Simulation */}
+            {/* Image Container */}
             <div
               className='relative w-full h-full flex items-center justify-center overflow-hidden touch-none'
               onClick={closeModal}
@@ -133,15 +112,18 @@ const Gallery = () => {
               </button>
 
               <motion.div
-                layoutId={`image-${selectedId}`}
+                key={selectedId}
                 className='w-full max-w-md px-1'
                 style={{ scale }}
-                onClick={(e) => e.stopPropagation()} // Prevent close on image tap
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
                 drag
                 dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
                 dragElastic={0.2}
-                onDragEnd={(e, info) => {
-                  // Simple swipe to close logic if dragged far enough down
+                onDragEnd={(_e, info) => {
                   if (info.offset.y > 150) closeModal();
                 }}
               >
