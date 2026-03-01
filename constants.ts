@@ -56,7 +56,7 @@ export const ACCOUNT_DATA: AccountGroup[] = [
     side: 'groom',
     label: '신랑 측',
     accounts: [
-      { role: '신랑', name: '남상이', bank: '○○은행', account: '000-0000-0000' },
+      { role: '신랑', name: '남상이', bank: '우리은행', account: '1002-160-707015' },
       { role: '신랑 어머니', name: '이일순', bank: '○○은행', account: '000-0000-0000' },
     ],
   },
@@ -64,8 +64,8 @@ export const ACCOUNT_DATA: AccountGroup[] = [
     side: 'bride',
     label: '신부 측',
     accounts: [
-      { role: '신부', name: '김현아', bank: '○○은행', account: '000-0000-0000' },
-      { role: '신부 어머니', name: '임민자', bank: '○○은행', account: '000-0000-0000' },
+      { role: '신부', name: '김현아', bank: '신한은행', account: '110-478-330600' },
+      { role: '신부 어머니', name: '임민자', bank: '국민은행', account: '639002-01-132410' },
     ],
   },
 ];
@@ -85,7 +85,7 @@ export const TRANSPORT_DATA: TransportInfo[] = [
     type: 'car',
     title: '자가용',
     details: [
-      '네비게이션: "서울여성플라자" 또는 "서울시 동작구 여의대방로 54 18"',
+     '네비게이션: "서울여성플라자" 또는 "서울시 동작구 여의대방로 54 18"',
       '지하 주차장 (2시간 무료)',
     ],
   },
