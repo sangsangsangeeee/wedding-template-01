@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Share2 } from 'lucide-react';
 import { WEDDING_DATA } from '../constants'; // For getting names or details
-import heroImage from '../assets/hero.jpeg';
+
 
 const Footer = () => {
   useEffect(() => {
@@ -19,7 +19,7 @@ const Footer = () => {
         content: {
           title: `${WEDDING_DATA.groom.name} ♥ ${WEDDING_DATA.bride.name} 결혼합니다`,
           description: '저희의 소중한 순간에 함께 해주세요.',
-          imageUrl: `${siteUrl}${heroImage}`,
+          imageUrl: `${siteUrl}/hero.jpeg`,
           link: {
             mobileWebUrl: siteUrl,
             webUrl: siteUrl,
