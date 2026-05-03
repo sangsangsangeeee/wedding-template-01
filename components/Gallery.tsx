@@ -57,12 +57,14 @@ const Gallery = () => {
   }, [scale]);
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (e.touches.length === 2 && pinchStartDistRef.current !== null) {
-      e.preventDefault();
-      const currentDist = getPinchDistance(e.touches);
-      const ratio = currentDist / pinchStartDistRef.current;
-      const newScale = Math.min(3, Math.max(1, pinchStartScaleRef.current * ratio));
-      setScale(newScale);
+    if (e.touches.length === 2) {
+      if (pinchStartDistRef.current !== null) {
+        e.preventDefault();
+        const currentDist = getPinchDistance(e.touches);
+        const ratio = currentDist / pinchStartDistRef.current;
+        const newScale = Math.min(3, Math.max(1, pinchStartScaleRef.current * ratio));
+        setScale(newScale);
+      }
     }
   }, []);
 
@@ -169,11 +171,14 @@ const Gallery = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={(e) => e.stopPropagation()}
-                drag={scale === 1}
-                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                dragElastic={0.3}
+                drag={true}
+                dragConstraints={scale > 1
+                  ? { left: -200, right: 200, top: -200, bottom: 200 }
+                  : { left: 0, right: 0, top: 0, bottom: 0 }
+                }
+                dragElastic={scale > 1 ? 0.1 : 0.3}
                 onDragEnd={(_e, info) => {
-                  if (scale !== 1) return;
+                  if (scale > 1) return;
                   if (info.offset.y > 150) {
                     closeModal();
                   } else if (info.offset.x < -80) {
