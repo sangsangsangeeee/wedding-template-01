@@ -33,7 +33,13 @@ export const WEDDING_DATA: WeddingInfo = {
 
 // Generate placeholder images using picsum
 // Import all gallery images from assets using Vite's import.meta.glob
-const galleryImageModules = import.meta.glob('./assets/gallery-*.jpeg', {
+const galleryImageModules = import.meta.glob('./assets/gallery-*.webp', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+const galleryOriginalModules = import.meta.glob('./assets/gallery-*.jpeg', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -41,13 +47,15 @@ const galleryImageModules = import.meta.glob('./assets/gallery-*.jpeg', {
 
 // We know there are 17 images from gallery-0 to gallery-16
 export const GALLERY_IMAGES: GalleryImage[] = Array.from({ length: 17 }).map((_, i) => {
-  const src = galleryImageModules[`./assets/gallery-${i}.jpeg`] as string;
+  const src = galleryImageModules[`./assets/gallery-${i}.webp`] as string;
+  const srcOriginal = galleryOriginalModules[`./assets/gallery-${i}.jpeg`] as string;
   return {
     id: i + 1,
     src,
+    srcOriginal,
     alt: `Wedding Photo ${i + 1}`,
     width: 800,
-    height: i % 2 === 0 ? 1200 : 800, // We keep the alternating sizes for the masonry layout
+    height: i % 2 === 0 ? 1200 : 800,
   };
 });
 

@@ -24,6 +24,7 @@ export interface WeddingInfo {
 export interface GalleryImage {
   id: number;
   src: string;
+  srcOriginal: string;
   alt: string;
   width: number;
   height: number;

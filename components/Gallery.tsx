@@ -177,7 +177,7 @@ const Gallery = () => {
                 }}
               >
                 <img
-                  src={selectedImage.src}
+                  src={selectedImage.srcOriginal}
                   alt={selectedImage.alt}
                   className='w-full h-auto object-contain shadow-2xl max-h-[80vh]'
                 />
