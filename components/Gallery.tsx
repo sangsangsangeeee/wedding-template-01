@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_IMAGES } from '../constants';
@@ -18,12 +18,12 @@ const Gallery = () => {
 
   const closeModal = () => {
     setSelectedId(null);
+    setScale(1);
     document.body.style.overflow = 'unset';
   };
 
   const selectedImage = GALLERY_IMAGES.find((img) => img.id === selectedId);
 
-  // Navigate in modal
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedId === null) return;
@@ -42,33 +42,51 @@ const Gallery = () => {
     setScale(1);
   };
 
-  const getPinchDistance = (touches: React.TouchList) => {
+  const getPinchDistance = (touches: TouchList) => {
     const dx = touches[0].clientX - touches[1].clientX;
     const dy = touches[0].clientY - touches[1].clientY;
     return Math.sqrt(dx * dx + dy * dy);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: TouchEvent) => {
     if (e.touches.length === 2) {
+      e.preventDefault();
       pinchStartDistRef.current = getPinchDistance(e.touches);
       pinchStartScaleRef.current = scale;
     }
-  };
+  }, [scale]);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = useCallback((e: TouchEvent) => {
     if (e.touches.length === 2 && pinchStartDistRef.current !== null) {
+      e.preventDefault();
       const currentDist = getPinchDistance(e.touches);
       const ratio = currentDist / pinchStartDistRef.current;
       const newScale = Math.min(3, Math.max(1, pinchStartScaleRef.current * ratio));
       setScale(newScale);
     }
-  };
+  }, []);
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleTouchEnd = useCallback((e: TouchEvent) => {
     if (e.touches.length < 2) {
       pinchStartDistRef.current = null;
     }
-  };
+  }, []);
+
+  // passive:false 로 등록해야 preventDefault() 가 동작함
+  const imageContainerRef = useRef<HTMLDivElement | null>(null);
+  const setImageContainerRef = useCallback((node: HTMLDivElement | null) => {
+    if (imageContainerRef.current) {
+      imageContainerRef.current.removeEventListener('touchstart', handleTouchStart);
+      imageContainerRef.current.removeEventListener('touchmove', handleTouchMove);
+      imageContainerRef.current.removeEventListener('touchend', handleTouchEnd);
+    }
+    imageContainerRef.current = node;
+    if (node) {
+      node.addEventListener('touchstart', handleTouchStart, { passive: false });
+      node.addEventListener('touchmove', handleTouchMove, { passive: false });
+      node.addEventListener('touchend', handleTouchEnd, { passive: false });
+    }
+  }, [handleTouchStart, handleTouchMove, handleTouchEnd]);
 
   return (
     <section className='py-20 bg-cream border-t border-cream-200 min-h-screen'>
@@ -124,11 +142,9 @@ const Gallery = () => {
 
             {/* Image Container */}
             <div
+              ref={setImageContainerRef}
               className='relative w-full h-full flex items-center justify-center overflow-hidden'
               onClick={closeModal}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
             >
               {/* Navigation Buttons */}
               <button
@@ -148,16 +164,16 @@ const Gallery = () => {
                 key={selectedId}
                 className='w-full max-w-md px-1'
                 style={{ scale }}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={(e) => e.stopPropagation()}
-                drag
+                drag={scale === 1 ? true : false}
                 dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
                 dragElastic={0.2}
                 onDragEnd={(_e, info) => {
-                  if (info.offset.y > 150) closeModal();
+                  if (scale === 1 && info.offset.y > 150) closeModal();
                 }}
               >
                 <img
