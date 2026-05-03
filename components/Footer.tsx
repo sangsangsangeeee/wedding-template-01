@@ -13,23 +13,24 @@ const Footer = () => {
 
   const handleShare = () => {
     if (window.Kakao) {
+      const siteUrl = 'https://wedding.myeonang.cloud';
       window.Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
           title: `${WEDDING_DATA.groom.name} ♥ ${WEDDING_DATA.bride.name} 결혼합니다`,
           description: '저희의 소중한 순간에 함께 해주세요.',
-          imageUrl: `${window.location.origin}${heroImage}`, // Use actual hero image
+          imageUrl: `${siteUrl}${heroImage}`,
           link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
+            mobileWebUrl: siteUrl,
+            webUrl: siteUrl,
           },
         },
         buttons: [
           {
             title: '청첩장 보기',
             link: {
-              mobileWebUrl: window.location.href,
-              webUrl: window.location.href,
+              mobileWebUrl: siteUrl,
+              webUrl: siteUrl,
             },
           },
         ],
