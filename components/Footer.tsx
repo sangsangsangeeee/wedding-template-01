@@ -13,7 +13,7 @@ const Footer = () => {
 
   const handleShare = () => {
     if (window.Kakao) {
-      const siteUrl = 'https://wedding.myeonang.cloud';
+      const siteUrl = 'https://wedding.myeonang.cloud/classic';
       window.Kakao.Share.sendDefault({
         objectType: 'feed',
         content: {
