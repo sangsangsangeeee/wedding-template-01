@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_IMAGES } from '../constants';
@@ -7,6 +7,8 @@ import FadeIn from './FadeIn';
 const Gallery = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [scale, setScale] = useState(1);
+  const pinchStartDistRef = useRef<number | null>(null);
+  const pinchStartScaleRef = useRef<number>(1);
 
   const openModal = (id: number) => {
     setSelectedId(id);
@@ -38,6 +40,34 @@ const Gallery = () => {
     const prevIndex = (currentIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
     setSelectedId(GALLERY_IMAGES[prevIndex].id);
     setScale(1);
+  };
+
+  const getPinchDistance = (touches: React.TouchList) => {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      pinchStartDistRef.current = getPinchDistance(e.touches);
+      pinchStartScaleRef.current = scale;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchStartDistRef.current !== null) {
+      const currentDist = getPinchDistance(e.touches);
+      const ratio = currentDist / pinchStartDistRef.current;
+      const newScale = Math.min(3, Math.max(1, pinchStartScaleRef.current * ratio));
+      setScale(newScale);
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length < 2) {
+      pinchStartDistRef.current = null;
+    }
   };
 
   return (
@@ -94,8 +124,11 @@ const Gallery = () => {
 
             {/* Image Container */}
             <div
-              className='relative w-full h-full flex items-center justify-center overflow-hidden touch-none'
+              className='relative w-full h-full flex items-center justify-center overflow-hidden'
               onClick={closeModal}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               {/* Navigation Buttons */}
               <button
