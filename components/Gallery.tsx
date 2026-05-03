@@ -169,11 +169,24 @@ const Gallery = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 onClick={(e) => e.stopPropagation()}
-                drag={scale === 1 ? true : false}
-                dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
-                dragElastic={0.2}
+                drag={scale === 1}
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                dragElastic={0.3}
                 onDragEnd={(_e, info) => {
-                  if (scale === 1 && info.offset.y > 150) closeModal();
+                  if (scale !== 1) return;
+                  if (info.offset.y > 150) {
+                    closeModal();
+                  } else if (info.offset.x < -80) {
+                    const currentIndex = GALLERY_IMAGES.findIndex((img) => img.id === selectedId);
+                    const nextIndex = (currentIndex + 1) % GALLERY_IMAGES.length;
+                    setSelectedId(GALLERY_IMAGES[nextIndex].id);
+                    setScale(1);
+                  } else if (info.offset.x > 80) {
+                    const currentIndex = GALLERY_IMAGES.findIndex((img) => img.id === selectedId);
+                    const prevIndex = (currentIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+                    setSelectedId(GALLERY_IMAGES[prevIndex].id);
+                    setScale(1);
+                  }
                 }}
               >
                 <img
