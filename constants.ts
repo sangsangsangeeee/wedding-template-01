@@ -57,7 +57,7 @@ export const ACCOUNT_DATA: AccountGroup[] = [
     label: '신랑 측',
     accounts: [
       { role: '신랑', name: '남상이', bank: '우리은행', account: '1002-160-707015' },
-      { role: '신랑 어머니', name: '이일순', bank: '경남은행', account: '513-21-0234141' },
+      { role: '신랑 어머니', name: '이일순', bank: '경남은행', account: '207-0080-102604' },
     ],
   },
   {
